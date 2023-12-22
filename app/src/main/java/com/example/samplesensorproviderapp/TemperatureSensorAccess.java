@@ -4,18 +4,17 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.widget.TextView;
 
-public class LightSensorAccess implements SensorEventListener {
+public class TemperatureSensorAccess implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor mLight;
     private TextView sensor_field;
 
-    public LightSensorAccess(SensorManager sm, TextView tv){
+    public TemperatureSensorAccess(SensorManager sm, TextView tv){
         sensorManager = sm;
         sensor_field = tv;
-        mLight = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mLight = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
         sensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
     }
     @Override
@@ -29,7 +28,6 @@ public class LightSensorAccess implements SensorEventListener {
         float lux = event.values[0];
         // Show luminosity value on the text field
         sensor_field.setText(String.valueOf(lux));
-        Log.d("teste", String.valueOf(lux));
     }
 
     @Override
